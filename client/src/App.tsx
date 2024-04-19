@@ -1,20 +1,26 @@
 import "./App.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Register, Login, Home, SinglePost, WritePost } from "./pages";
-import { Layout } from "./layout";
+
+import { Register, Login, Home, SinglePost, WritePost, Contact } from "@/pages";
+import { Layout } from "@/layout";
+import { ROUTES } from "@/constants/routes";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: ROUTES.HOME,
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: ROUTES.HOME,
         element: <Home />,
       },
       {
-        path: "/post/:id",
+        path: ROUTES.CONTACT,
+        element: <Contact />,
+      },
+      {
+        path: ROUTES.POST,
         element: <SinglePost />,
       },
       {
