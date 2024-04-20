@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import PostCard from "@/layout/PostCard";
 import { useCreatePost } from "@/services/mutations";
 import { usePostsQuery } from "@/services/queries";
@@ -8,10 +9,9 @@ const Home = () => {
 
   const handleCreatePost = () => {
     createPost({
-      cover: "fe pic 2",
-      desc: "hello from fe 2",
-      id: 5,
-      title: "fe title",
+      cover: "FE cover",
+      desc: "FE desc",
+      title: "fE title",
     });
   };
 
@@ -24,7 +24,7 @@ const Home = () => {
       {posts?.map((post) => (
         <PostCard post={post} />
       ))}
-      <button onClick={handleCreatePost}>add</button>
+      <Button onClick={handleCreatePost}>Add post</Button>
     </section>
   );
 };

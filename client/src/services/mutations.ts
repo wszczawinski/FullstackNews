@@ -6,7 +6,7 @@ export const useCreatePost = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: Post) => createPost(data),
+    mutationFn: (data: Omit<Post, "id">) => createPost(data),
     onMutate: () => {
       console.log("mutate");
     },
