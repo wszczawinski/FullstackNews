@@ -5,11 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
-const mysql_1 = __importDefault(require("mysql"));
+const mysql2_1 = __importDefault(require("mysql2"));
 const cors_1 = __importDefault(require("cors"));
 dotenv_1.default.config();
 const { PORT, MY_SQL_DB_HOST, MY_SQL_DB_USER, MY_SQL_DB_PASSWORD, MY_SQL_DB_DATABASE, } = process.env;
-const db = mysql_1.default.createConnection({
+const db = mysql2_1.default.createConnection({
     host: MY_SQL_DB_HOST,
     user: MY_SQL_DB_USER,
     password: MY_SQL_DB_PASSWORD,
