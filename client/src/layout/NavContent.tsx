@@ -6,7 +6,7 @@ export const NavContent = ({ onClick }: { onClick?: () => void }) => {
   const navItems = [
     { name: "Główna", href: ROUTES.HOME },
     { name: "Kontakt", href: ROUTES.CONTACT },
-    { name: "Post", href: ROUTES.POST },
+    { name: "Linki", href: ROUTES.LINKS },
   ];
   return (
     <>

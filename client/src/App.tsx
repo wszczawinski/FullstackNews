@@ -1,8 +1,6 @@
-import "./App.css";
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { Register, Login, Home, SinglePost, WritePost, Contact } from "@/pages";
+import { Login, Home, SinglePost, WritePost, Contact, Links } from "@/pages";
 import { Layout } from "@/layout";
 import { ROUTES } from "@/constants/routes";
 
@@ -24,14 +22,14 @@ const router = createBrowserRouter([
         element: <SinglePost />,
       },
       {
+        path: ROUTES.LINKS,
+        element: <Links />,
+      },
+      {
         path: "/write",
         element: <WritePost />,
       },
     ],
-  },
-  {
-    path: "/register",
-    element: <Register />,
   },
   {
     path: "/login",

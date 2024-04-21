@@ -9,7 +9,7 @@ import {
 
 import { Post } from "@/services/api";
 
-const PostCard = ({ post }: { post: Post }) => {
+export const PostCard = ({ post }: { post: Post }) => {
   return (
     <>
       <Card key={post.id}>
@@ -27,5 +27,3 @@ const PostCard = ({ post }: { post: Post }) => {
     </>
   );
 };
-
-export default PostCard;
