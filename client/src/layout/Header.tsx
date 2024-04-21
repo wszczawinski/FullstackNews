@@ -1,10 +1,9 @@
-import { Navbar } from ".";
-import logo from "@/images/logo.png";
+import { Navbar, Hero } from ".";
 
 const Header = () => {
   return (
     <>
-      <img src={logo} alt="" />
+      <Hero />
       <Navbar />
     </>
   );

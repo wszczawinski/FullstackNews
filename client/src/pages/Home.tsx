@@ -20,7 +20,10 @@ const Home = () => {
   }
 
   return (
-    <section className="flex flex-col gap-4">
+    <section className="flex-1 flex flex-col gap-4">
+      <div className="flex w-full flex-col items-start justify-between rounded-md border px-4 py-3 sm:flex-row sm:items-center">
+        
+      </div>
       {posts?.map((post) => (
         <PostCard post={post} />
       ))}
