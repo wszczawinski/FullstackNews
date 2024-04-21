@@ -8,7 +8,7 @@ import add5 from "@/images/add_5.png";
 
 const Sidebar = () => {
   return (
-    <aside className="hidden flex-none md:flex flex-col gap-4 h-full w-44">
+    <aside className="hidden flex-none md:flex flex-col gap-6 h-full w-44">
       <SidebarPoster
         posters={[
           { image: add2, onClick: () => console.log("click") },
@@ -17,6 +17,7 @@ const Sidebar = () => {
         delay={8000}
       />
       <SidebarPoster
+        title={"Polecamy"}
         posters={[
           { image: add5, onClick: () => console.log("click") },
           { image: add4 },
@@ -25,6 +26,7 @@ const Sidebar = () => {
         ]}
       />
       <SidebarPoster
+        title={"1% podatku"}
         posters={[
           { image: add1, onClick: () => console.log("click") },
           { image: add4 },

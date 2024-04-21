@@ -8,15 +8,20 @@ import {
 
 type Poster = { image: string; onClick?: () => void };
 
+type SidebarPosterProps = {
+  posters: Poster[];
+  title?: string;
+  delay?: number;
+};
+
 export const SidebarPoster = ({
   posters,
+  title,
   delay = 3000,
-}: {
-  posters: Poster[];
-  delay?: number;
-}) => {
+}: SidebarPosterProps) => {
   return (
-    <article className="w-full h-60">
+    <article className={`w-full  ${title ? 'h-72' : 'h-64'  } `}>
+      <p className="text-l pb-1">{title}</p>
       <Carousel
         plugins={[
           Autoplay({
@@ -25,6 +30,7 @@ export const SidebarPoster = ({
           }),
         ]}
         opts={{ loop: true }}
+        isDots
       >
         <CarouselContent>
           {posters.map((poster) => (

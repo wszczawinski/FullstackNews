@@ -15,7 +15,7 @@ const Hero = () => {
           alt="logo"
         />
         <img
-          className="w-full md:max-w-[460px] lg:max-w-[580px]"
+          className="rounded w-full md:max-w-[460px] lg:max-w-[580px]"
           src={randomBanner}
           alt="logo"
         />
