@@ -9,14 +9,17 @@ export type Post = {
   title: string;
   desc: string;
   cover: string;
+  created: string;
 };
 
 enum ENDPOINTS {
   POSTS = "posts",
 }
 
-export const getPosts = async () => {
-  return (await axiosInstance.get<Post[]>(ENDPOINTS.POSTS)).data;
+export const getPosts = async (page: number) => {
+  return (
+    await axiosInstance.get<Post[]>(ENDPOINTS.POSTS, { params: { page } })
+  ).data;
 };
 
 export const createPost = async (data: Omit<Post, "id">) => {
