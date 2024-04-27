@@ -17,7 +17,7 @@ const Sidebar = () => {
         delay={8000}
       />
       <SidebarPoster
-        title={"Polecamy"}
+        title={"Zapraszamy"}
         posters={[
           { image: add5, onClick: () => console.log("click") },
           { image: add4 },
@@ -32,6 +32,14 @@ const Sidebar = () => {
           { image: add4 },
         ]}
         delay={5000}
+      />
+      <SidebarPoster
+        title={"Polecamy"}
+        posters={[
+          { image: add1, onClick: () => console.log("click") },
+          { image: add4 },
+        ]}
+        delay={7000}
       />
     </aside>
   );
