@@ -15,7 +15,7 @@ const Navbar = () => {
     <div className="sticky top-0 z-50 w-full h-16 px-4 md:px-6 border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="h-full flex items-center justify-between gap-4 w-full mx-auto max-w-screen-lg">
         <Link to="/">
-          <img src={logo} alt="small logo" />
+          <img width={169} height={29} src={logo} alt="small logo" />
         </Link>
 
         <nav className="hidden md:flex font-medium flex-row items-center justify-end gap-5 lg:gap-6">

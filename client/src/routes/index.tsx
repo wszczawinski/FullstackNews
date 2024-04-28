@@ -31,5 +31,5 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const { data: posts } = useSuspenseQuery(postsQueryOptions({ page: 1 }));
-  return <Posts posts={posts} page={1} category="all" />;
+  return <Posts posts={posts} />;
 }

@@ -39,8 +39,8 @@ export const Route = createFileRoute("/news")({
 });
 
 function PostsPage() {
-  const { page, category } = Route.useSearch();
+  const { page } = Route.useSearch();
   const { data: posts } = useSuspenseQuery(postsQueryOptions({ page }));
 
-  return <Posts posts={posts} page={page} category={category} />;
+  return <Posts posts={posts} />;
 }
