@@ -4,9 +4,8 @@ import { Link } from "@tanstack/react-router";
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { NavContent } from "@/components/NavContent";
 import logo from "@/images/logo_mobile.png";
-
-import { NavContent } from "./NavContent";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);

@@ -3,10 +3,14 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { QueryClient } from "@tanstack/react-query";
 import { Footer, Hero, MainContent, Navbar } from "@/layout";
+import { Toaster } from "@/components/ui/toaster";
+import { AuthContext } from "@/context/authContext";
 
-export const Route = createRootRouteWithContext<{
+interface MyRouterContext {
+  auth: AuthContext;
   queryClient: QueryClient;
-}>()({
+}
+export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: RootComponent,
 });
 
@@ -19,6 +23,8 @@ function RootComponent() {
         <Outlet />
       </MainContent>
       <Footer />
+
+      <Toaster />
 
       <ReactQueryDevtools buttonPosition="top-right" />
       <TanStackRouterDevtools position="bottom-right" />

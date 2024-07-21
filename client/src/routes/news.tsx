@@ -1,11 +1,10 @@
 import { z } from "zod";
-
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { postsQueryOptions } from "@/services/queries";
 import { Spinner } from "@/components/ui/spinner";
-import { Posts } from "@/components/Posts";
+import { Posts } from "@/modules/News/Posts";
 
 const newsSearchSchema = z.object({
   page: z.number().catch(1),
@@ -18,12 +17,7 @@ export const Route = createFileRoute("/news")({
   validateSearch: (search) => newsSearchSchema.parse(search),
   loaderDeps: (search): HomeParams => newsSearchSchema.parse(search),
   loader: ({ context: { queryClient }, deps: { page } }) => {
-    // console.log(page, category);
-    return queryClient.ensureQueryData(
-      postsQueryOptions({
-        page,
-      })
-    );
+    return queryClient.ensureQueryData(postsQueryOptions({ page }));
   },
   pendingComponent: () => (
     <div className="h-80 flex flex-col items-center justify-center">

@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { POST_CATEGORIES } from "@/constants";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 
 export const CategorySelect = () => {
   const navigate = useNavigate();

@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 
+import { CategorySelect } from "@/modules/News/CategorySelect";
+import { HomePagination } from "@/components/HomePagination";
+import { HomeBreadcrumbs } from "@/components/HomeBreadcrumbs";
 import { Post } from "@/services/api";
 
 import { NewsList } from "./NewsList";
-import { CategorySelect } from "./CategorySelect";
-import { HomePagination } from "./HomePagination";
-import { HomeBreadcrumbs } from "./HomeBreadcrumbs";
 
 export const Posts = ({ posts }: { posts: Post[] }) => {
   const scrollToTop = () => {

@@ -1,6 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Post, createPost } from "./api";
-import { QUERY_KEYS } from "./queries";
+
+import { useToast } from "@/components/ui/use-toast";
+
+import {
+  ENDPOINTS,
+  LoginData,
+  Post,
+  authLogin,
+  authLogout,
+  createPost,
+} from "./api";
 
 export const useCreatePost = () => {
   const queryClient = useQueryClient();
@@ -11,7 +20,39 @@ export const useCreatePost = () => {
       console.log("mutate");
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.POSTS] });
+      queryClient.invalidateQueries({ queryKey: [ENDPOINTS.POSTS] });
+    },
+  });
+};
+
+export const useAuthLogin = ({ onSuccess }: { onSuccess: () => void }) => {
+  const { toast } = useToast();
+
+  return useMutation({
+    mutationFn: (data: LoginData) => authLogin(data),
+    onSuccess: (data) => {
+      onSuccess();
+
+      toast({
+        title: "Success",
+        description: data.data.message,
+      });
+    },
+  });
+};
+
+export const useAuthLogout = ({ onSuccess }: { onSuccess: () => void }) => {
+  const { toast } = useToast();
+
+  return useMutation({
+    mutationFn: authLogout,
+    onSuccess: (data) => {
+      onSuccess();
+
+      toast({
+        title: "Success",
+        description: data.data.message,
+      });
     },
   });
 };

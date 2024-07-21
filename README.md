@@ -5,11 +5,12 @@
 - TypeScript
 - React
 - Vite
-- Shadcn
+- Shadcn/ui
 - Tailwind
 - Zod - schema validation with static type inference
 - TanStack Query - staleTime, gcTime, persistQueryClient
 - TanStack Router - fully typesafe router
+- React Hook Form - flexible and extensible forms
 
 ### BE
 
@@ -17,3 +18,5 @@
 - Node.js
 - Express
 - MySQL
+- Multer
+- JWT

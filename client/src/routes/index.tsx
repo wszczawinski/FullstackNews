@@ -1,19 +1,14 @@
+import { ZapOff } from "lucide-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
-import { ZapOff } from "lucide-react";
-
-import { Posts } from "@/components/Posts";
+import { Posts } from "@/modules/News/Posts";
 import { Spinner } from "@/components/ui/spinner";
 import { postsQueryOptions } from "@/services/queries";
 
 export const Route = createFileRoute("/")({
   loader: ({ context: { queryClient } }) =>
-    queryClient.ensureQueryData(
-      postsQueryOptions({
-        page: 1,
-      })
-    ),
+    queryClient.ensureQueryData(postsQueryOptions({ page: 1 })),
   pendingComponent: () => (
     <div className="h-80 flex flex-col items-center justify-center">
       <Spinner size={"large"} />
@@ -31,5 +26,6 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const { data: posts } = useSuspenseQuery(postsQueryOptions({ page: 1 }));
+
   return <Posts posts={posts} />;
 }
