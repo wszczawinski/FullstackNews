@@ -26,6 +26,7 @@
     "mysql2": "^3.11.0"
   },
   "devDependencies": {
+    "@packages/types": "workspace:*",
     "@types/bcrypt": "^5.0.2",
     "@types/cookie-parser": "^1.4.7",
     "@types/cors": "^2.8.17",

@@ -48,6 +48,9 @@ importers:
         specifier: ^3.11.0
         version: 3.11.0
     devDependencies:
+      '@packages/types':
+        specifier: workspace:*
+        version: link:../../packages/types
       '@types/bcrypt':
         specifier: ^5.0.2
         version: 5.0.2

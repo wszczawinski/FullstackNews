@@ -13,10 +13,6 @@ const authApi = axios.create({
 
 authApi.defaults.headers.common["Content-Type"] = "application/json";
 
-export type PostsQueryParams = {
-  page: number;
-};
-
 export enum ENDPOINTS {
   POSTS = "posts",
   IMAGES = "images",

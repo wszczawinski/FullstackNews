@@ -1,8 +1,8 @@
 import { keepPreviousData, queryOptions } from "@tanstack/react-query";
 
-import { Post } from "@packages/types";
+import { Post, PostsQueryParams } from "@packages/types";
 
-import { ENDPOINTS, PostsQueryParams, fetcher } from "./api";
+import { ENDPOINTS, fetcher } from "./api";
 
 export const postsQueryOptions = (params: PostsQueryParams) => {
   return queryOptions({
