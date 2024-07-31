@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import { Post } from "@packages/types";
+
 const apiUrl = import.meta.env.VITE_BE_URL;
 
 export const axiosInstance = axios.create({ baseURL: apiUrl });
@@ -11,21 +13,8 @@ const authApi = axios.create({
 
 authApi.defaults.headers.common["Content-Type"] = "application/json";
 
-export type Post = {
-  id: number;
-  title: string;
-  desc: string;
-  cover: string;
-  created: string;
-};
-
 export type PostsQueryParams = {
   page: number;
-};
-
-export type LoginData = {
-  username: string;
-  password: string;
 };
 
 export enum ENDPOINTS {

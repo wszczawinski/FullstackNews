@@ -9,7 +9,11 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "@packages/ui": path.resolve(__dirname, "../../packages/ui/src/main.ts")
+      "@packages/ui": path.resolve(__dirname, "../../packages/ui/src/main.ts"),
+      "@packages/types": path.resolve(
+        __dirname,
+        "../../packages/types/src/main.ts"
+      ),
     },
   },
 });

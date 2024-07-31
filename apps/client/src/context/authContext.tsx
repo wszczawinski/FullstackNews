@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 
-import { LoginData } from "@/services/api";
+import { LoginData } from "@packages/types";
+
 import { useAuthLogin, useAuthLogout } from "@/services/mutations";
 
 export type AuthContext = {

@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 
+import { Post } from "@packages/types";
+
 import { CategorySelect } from "@/modules/News/CategorySelect";
 import { HomePagination } from "@/components/HomePagination";
 import { HomeBreadcrumbs } from "@/components/HomeBreadcrumbs";
-import { Post } from "@/services/api";
 
 import { NewsList } from "./NewsList";
 

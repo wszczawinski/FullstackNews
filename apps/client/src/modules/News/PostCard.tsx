@@ -1,4 +1,5 @@
 import { Calendar } from "lucide-react";
+
 import {
   Button,
   Card,
@@ -8,8 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@packages/ui";
-
-import { Post } from "@/services/api";
+import { Post } from "@packages/types";
 
 import news_img_1 from "@/images/news_img_1.png";
 import news_img_2 from "@/images/news_img_2.png";

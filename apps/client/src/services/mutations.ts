@@ -1,15 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useToast } from "@packages/ui";
+import { Post, LoginData } from "@packages/types";
 
-import {
-  ENDPOINTS,
-  LoginData,
-  Post,
-  authLogin,
-  authLogout,
-  createPost,
-} from "./api";
+import { ENDPOINTS, authLogin, authLogout, createPost } from "./api";
 
 export const useCreatePost = () => {
   const queryClient = useQueryClient();

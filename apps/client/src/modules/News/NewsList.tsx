@@ -1,9 +1,10 @@
 import React from "react";
 
+import { Post } from "@packages/types";
+
 import add1 from "@/images/posts_add_1.png";
 import add2 from "@/images/posts_add_2.png";
 import add3 from "@/images/posts_add_3.png";
-import { Post } from "@/services/api";
 
 import { PostCard } from "./PostCard";
 
