@@ -1,9 +1,0 @@
-node_modules
-dist
-.env*
-haters
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.DS_Store
