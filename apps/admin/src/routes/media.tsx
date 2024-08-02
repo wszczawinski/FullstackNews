@@ -3,7 +3,10 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { createLazyFileRoute } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  redirect,
+} from "@tanstack/react-router";
 
 import {
   Button,
@@ -14,7 +17,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  useToast
+  useToast,
 } from "@packages/ui";
 
 import { postImages } from "@/services/api";
@@ -111,6 +114,14 @@ const ImagesForm = () => {
   );
 };
 
-export const Route = createLazyFileRoute("/media")({
+export const Route = createFileRoute("/media")({
+  beforeLoad: ({ context, location }) => {
+    if (!context.auth.isAuthenticated) {
+      throw redirect({
+        to: "/login",
+        search: { redirect: location.href },
+      });
+    }
+  },
   component: ImagesForm,
 });

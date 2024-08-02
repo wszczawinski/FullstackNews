@@ -13,6 +13,9 @@ import {
 // 💡 route tree - run project to auto-generate
 import { routeTree } from "./routeTree.gen";
 
+import { useAuth } from "./context/useAuth";
+import { AuthContextProvider } from "./context/authContext";
+
 import "./index.css";
 
 const queryClient = new QueryClient({
@@ -54,7 +57,8 @@ declare module "@tanstack/react-router" {
 }
 
 function App() {
-  return <RouterProvider router={router} context={{ queryClient }} />;
+  const auth = useAuth();
+  return <RouterProvider router={router} context={{ queryClient, auth }} />;
 }
 
 const rootElement = document.getElementById("app")!;
@@ -65,7 +69,9 @@ if (!rootElement.innerHTML) {
   root.render(
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
-        <App />
+        <AuthContextProvider>
+          <App />
+        </AuthContextProvider>
       </QueryClientProvider>
     </React.StrictMode>
   );

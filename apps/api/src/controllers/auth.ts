@@ -47,7 +47,10 @@ export const login = (req: Request, res: Response) => {
     const token = jwt.sign({ id: data[0].id }, String(JWT_KEY), {
       expiresIn: "1h",
     });
-
+    // res.header(
+    //   "Access-Control-Allow-Headers",
+    //   "Origin, X-Requested-With, Content-Type, Accept"
+    // );
     res
       .cookie(cookieKey, token, { httpOnly: true })
       .status(200)

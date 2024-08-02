@@ -1,7 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { SiYoutube } from "@icons-pack/react-simple-icons";
+
+import { useAuth } from "@/context/useAuth";
 
 export const NavContent = ({ onClick }: { onClick?: () => void }) => {
+  const { logout } = useAuth();
+
   return (
     <>
       <Link
@@ -22,15 +25,22 @@ export const NavContent = ({ onClick }: { onClick?: () => void }) => {
         Linki
       </Link>
       <Link
-        to={"/"}
+        to="/media"
         onClick={onClick}
         className="text-muted-foreground transition-colors hover:text-foreground"
+        activeProps={{ className: "text-sky-600" }}
       >
-        Rowerowa
+        Media
       </Link>
-      <a href={"#"} onClick={onClick}>
-        <SiYoutube color="#282828" />
-      </a>
+      <Link
+        to="/login"
+        onClick={onClick}
+        className="text-muted-foreground transition-colors hover:text-foreground"
+        activeProps={{ className: "text-sky-600" }}
+      >
+        Login
+      </Link>
+      <a onClick={logout}>Logout</a>
     </>
   );
 };
