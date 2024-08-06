@@ -20,3 +20,9 @@
 - MySQL
 - Multer
 - JWT
+
+### DevOps
+
+- Nx
+- Pnpm Workspace
+- Github Actions
