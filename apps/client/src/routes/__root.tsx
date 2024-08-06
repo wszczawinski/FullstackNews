@@ -6,10 +6,8 @@ import { QueryClient } from "@tanstack/react-query";
 import { Toaster } from "@packages/ui";
 
 import { Footer, Hero, MainContent, Navbar } from "@/layout";
-import { AuthContext } from "@/context/authContext";
 
 interface MyRouterContext {
-  auth: AuthContext;
   queryClient: QueryClient;
 }
 export const Route = createRootRouteWithContext<MyRouterContext>()({
