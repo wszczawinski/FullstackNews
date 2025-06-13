@@ -17,12 +17,12 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
-          version: 9
+          version: 10
           run_install: false
 
       - name: Get pnpm store directory
@@ -42,7 +42,7 @@ jobs:
         run: pnpm install
 
       - name: Build packages
-        uses: mansagroup/nrwl-nx-action@v3
+        uses: mansagroup/nrwl-nx-action@v3.2.2
         with:
           targets: build
           all: 'true'
