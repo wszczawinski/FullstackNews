@@ -14,7 +14,7 @@ import {
 import { routeTree } from "./routeTree.gen";
 
 import { useAuth } from "./context/useAuth";
-import { AuthContextProvider } from "./context/authContext";
+import { AuthContextProvider } from "./context/AuthContextProvider.tsx";
 
 import "./index.css";
 

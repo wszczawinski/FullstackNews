@@ -1,4 +1,8 @@
-export type LoginData = {
-  username: string;
-  password: string;
-};
+export interface AuthResponse {
+    expiresAt: string | null;
+}
+
+export interface LoginRequest {
+    email: string;
+    password: string;
+}

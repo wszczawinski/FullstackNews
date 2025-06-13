@@ -1,52 +1,54 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useToast } from "@packages/ui";
-import { Post, LoginData } from "@packages/types";
+import { CreatePost } from "@packages/types/src/models/post.ts";
+import { AuthResponse, LoginRequest } from "@packages/types/src/models/auth.ts";
 
 import { ENDPOINTS, authLogin, authLogout, createPost } from "./api";
 
 export const useCreatePost = () => {
-  const queryClient = useQueryClient();
+    const queryClient = useQueryClient();
 
-  return useMutation({
-    mutationFn: (data: Omit<Post, "id">) => createPost(data),
-    onMutate: () => {
-      console.log("mutate");
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: [ENDPOINTS.POSTS] });
-    },
-  });
+    return useMutation({
+        mutationFn: (data: CreatePost) => createPost(data),
+        mutationKey: ["createPost"],
+        onMutate: () => {
+            console.log("mutate");
+        },
+        onSettled: () => {
+            queryClient.invalidateQueries({ queryKey: [ENDPOINTS.POSTS] });
+        },
+    });
 };
 
-export const useAuthLogin = ({ onSuccess }: { onSuccess: () => void }) => {
-  const { toast } = useToast();
+export const useAuthLogin = ({ onSuccess }: { onSuccess: (data: AuthResponse) => void }) => {
+    const { toast } = useToast();
 
-  return useMutation({
-    mutationFn: (data: LoginData) => authLogin(data),
-    onSuccess: (data) => {
-      onSuccess();
+    return useMutation({
+        mutationFn: (data: LoginRequest) => authLogin(data),
+        onSuccess: ({ data }) => {
+            onSuccess(data);
 
-      toast({
-        title: "Success",
-        description: data.data.message,
-      });
-    },
-  });
+            toast({
+                title: "Success",
+                description: "Login successful. Redirecting to dashboard...",
+            });
+        },
+    });
 };
 
 export const useAuthLogout = ({ onSuccess }: { onSuccess: () => void }) => {
-  const { toast } = useToast();
+    const { toast } = useToast();
 
-  return useMutation({
-    mutationFn: authLogout,
-    onSuccess: (data) => {
-      onSuccess();
+    return useMutation({
+        mutationFn: authLogout,
+        onSuccess: () => {
+            onSuccess();
 
-      toast({
-        title: "Success",
-        description: data.data.message,
-      });
-    },
-  });
+            toast({
+                title: "Success",
+                description: "Logout successful. Redirecting to login page...",
+            });
+        },
+    });
 };

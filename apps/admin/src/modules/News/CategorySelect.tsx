@@ -26,7 +26,7 @@ export const CategorySelect = () => {
           variant={"outline"}
           onClick={() =>
             navigate({
-              to: "/",
+              to: "/panel",
             })
           }
         >
@@ -38,15 +38,15 @@ export const CategorySelect = () => {
         onValueChange={(value) =>
           value === "all"
             ? navigate({
-                to: "/",
-              })
+              to: "/panel",
+            })
             : navigate({
-                to: "/news",
-                search: { category: value, page: 1 },
-              })
+              to: "/panel/news",
+              search: { category: value, page: 1 },
+            })
         }
       >
-        <SelectTrigger className="flex-1 focus:ring-0 focus:ring-offset-0 w-full sm:w-[220px]">
+        <SelectTrigger size="sm" className="flex-1 focus:ring-0 focus:ring-offset-0 w-full sm:w-[220px]">
           <SelectValue placeholder="Wybierz kategorie" />
         </SelectTrigger>
         <SelectContent>

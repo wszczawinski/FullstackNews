@@ -21,7 +21,7 @@ export const HomePagination = () => {
         {page <= 2 ? (
           <Link
             disabled={page === 1}
-            to="/news"
+            to="/panel/news"
             search={{ page: page - 1, category }}
           >
             <PaginationItem>
@@ -29,7 +29,7 @@ export const HomePagination = () => {
             </PaginationItem>
           </Link>
         ) : (
-          <Link to="/news" search={{ page: page - 1, category }}>
+          <Link to="/panel/news" search={{ page: page - 1, category }}>
             <PaginationItem>
               <PaginationPrevious />
             </PaginationItem>
@@ -37,13 +37,13 @@ export const HomePagination = () => {
         )}
 
         {page === 1 ? (
-          <Link to="/">
+          <Link to="/panel">
             <PaginationItem>
               <PaginationLink isActive>{page}</PaginationLink>
             </PaginationItem>
           </Link>
         ) : (
-          <Link to="/news" search={{ page: page, category }}>
+          <Link to="/panel/news" search={{ page: page, category }}>
             <PaginationItem>
               <PaginationLink isActive>{page}</PaginationLink>
             </PaginationItem>
@@ -51,7 +51,7 @@ export const HomePagination = () => {
         )}
         <Link
           disabled={page > 2}
-          to="/news"
+          to="/panel/news"
           search={{ page: page + 1, category }}
         >
           <PaginationItem>
@@ -60,7 +60,7 @@ export const HomePagination = () => {
         </Link>
         <Link
           disabled={page > 2}
-          to="/news"
+          to="/panel/news"
           search={{ page: page + 2, category }}
         >
           <PaginationItem>
@@ -74,7 +74,7 @@ export const HomePagination = () => {
           <PaginationLink>
             <Link
               disabled={page > 2}
-              to="/news"
+              to="/panel/news"
               search={{ page: page + 1, category }}
             >
               <PaginationNext />

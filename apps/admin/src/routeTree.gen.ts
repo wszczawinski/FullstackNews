@@ -8,50 +8,21 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router'
-
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as NewsImport } from './routes/news'
-import { Route as MediaImport } from './routes/media'
+import { Route as PanelImport } from './routes/panel'
 import { Route as IndexImport } from './routes/index'
-
-// Create Virtual Routes
-
-const LoginLazyImport = createFileRoute('/login')()
-const LinksLazyImport = createFileRoute('/links')()
-const ContactLazyImport = createFileRoute('/contact')()
+import { Route as PanelIndexImport } from './routes/panel/index'
+import { Route as PanelNewsImport } from './routes/panel/news'
+import { Route as PanelMediaImport } from './routes/panel/media'
+import { Route as PanelCreateImport } from './routes/panel/create'
 
 // Create/Update Routes
 
-const LoginLazyRoute = LoginLazyImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/login.lazy').then((d) => d.Route))
-
-const LinksLazyRoute = LinksLazyImport.update({
-  id: '/links',
-  path: '/links',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/links.lazy').then((d) => d.Route))
-
-const ContactLazyRoute = ContactLazyImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/contact.lazy').then((d) => d.Route))
-
-const NewsRoute = NewsImport.update({
-  id: '/news',
-  path: '/news',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const MediaRoute = MediaImport.update({
-  id: '/media',
-  path: '/media',
+const PanelRoute = PanelImport.update({
+  id: '/panel',
+  path: '/panel',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -59,6 +30,30 @@ const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const PanelIndexRoute = PanelIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PanelRoute,
+} as any)
+
+const PanelNewsRoute = PanelNewsImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => PanelRoute,
+} as any)
+
+const PanelMediaRoute = PanelMediaImport.update({
+  id: '/media',
+  path: '/media',
+  getParentRoute: () => PanelRoute,
+} as any)
+
+const PanelCreateRoute = PanelCreateImport.update({
+  id: '/create',
+  path: '/create',
+  getParentRoute: () => PanelRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -72,99 +67,119 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/media': {
-      id: '/media'
+    '/panel': {
+      id: '/panel'
+      path: '/panel'
+      fullPath: '/panel'
+      preLoaderRoute: typeof PanelImport
+      parentRoute: typeof rootRoute
+    }
+    '/panel/create': {
+      id: '/panel/create'
+      path: '/create'
+      fullPath: '/panel/create'
+      preLoaderRoute: typeof PanelCreateImport
+      parentRoute: typeof PanelImport
+    }
+    '/panel/media': {
+      id: '/panel/media'
       path: '/media'
-      fullPath: '/media'
-      preLoaderRoute: typeof MediaImport
-      parentRoute: typeof rootRoute
+      fullPath: '/panel/media'
+      preLoaderRoute: typeof PanelMediaImport
+      parentRoute: typeof PanelImport
     }
-    '/news': {
-      id: '/news'
+    '/panel/news': {
+      id: '/panel/news'
       path: '/news'
-      fullPath: '/news'
-      preLoaderRoute: typeof NewsImport
-      parentRoute: typeof rootRoute
+      fullPath: '/panel/news'
+      preLoaderRoute: typeof PanelNewsImport
+      parentRoute: typeof PanelImport
     }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/links': {
-      id: '/links'
-      path: '/links'
-      fullPath: '/links'
-      preLoaderRoute: typeof LinksLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginLazyImport
-      parentRoute: typeof rootRoute
+    '/panel/': {
+      id: '/panel/'
+      path: '/'
+      fullPath: '/panel/'
+      preLoaderRoute: typeof PanelIndexImport
+      parentRoute: typeof PanelImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface PanelRouteChildren {
+  PanelCreateRoute: typeof PanelCreateRoute
+  PanelMediaRoute: typeof PanelMediaRoute
+  PanelNewsRoute: typeof PanelNewsRoute
+  PanelIndexRoute: typeof PanelIndexRoute
+}
+
+const PanelRouteChildren: PanelRouteChildren = {
+  PanelCreateRoute: PanelCreateRoute,
+  PanelMediaRoute: PanelMediaRoute,
+  PanelNewsRoute: PanelNewsRoute,
+  PanelIndexRoute: PanelIndexRoute,
+}
+
+const PanelRouteWithChildren = PanelRoute._addFileChildren(PanelRouteChildren)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/media': typeof MediaRoute
-  '/news': typeof NewsRoute
-  '/contact': typeof ContactLazyRoute
-  '/links': typeof LinksLazyRoute
-  '/login': typeof LoginLazyRoute
+  '/panel': typeof PanelRouteWithChildren
+  '/panel/create': typeof PanelCreateRoute
+  '/panel/media': typeof PanelMediaRoute
+  '/panel/news': typeof PanelNewsRoute
+  '/panel/': typeof PanelIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/media': typeof MediaRoute
-  '/news': typeof NewsRoute
-  '/contact': typeof ContactLazyRoute
-  '/links': typeof LinksLazyRoute
-  '/login': typeof LoginLazyRoute
+  '/panel/create': typeof PanelCreateRoute
+  '/panel/media': typeof PanelMediaRoute
+  '/panel/news': typeof PanelNewsRoute
+  '/panel': typeof PanelIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/media': typeof MediaRoute
-  '/news': typeof NewsRoute
-  '/contact': typeof ContactLazyRoute
-  '/links': typeof LinksLazyRoute
-  '/login': typeof LoginLazyRoute
+  '/panel': typeof PanelRouteWithChildren
+  '/panel/create': typeof PanelCreateRoute
+  '/panel/media': typeof PanelMediaRoute
+  '/panel/news': typeof PanelNewsRoute
+  '/panel/': typeof PanelIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/media' | '/news' | '/contact' | '/links' | '/login'
+  fullPaths:
+    | '/'
+    | '/panel'
+    | '/panel/create'
+    | '/panel/media'
+    | '/panel/news'
+    | '/panel/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/media' | '/news' | '/contact' | '/links' | '/login'
-  id: '__root__' | '/' | '/media' | '/news' | '/contact' | '/links' | '/login'
+  to: '/' | '/panel/create' | '/panel/media' | '/panel/news' | '/panel'
+  id:
+    | '__root__'
+    | '/'
+    | '/panel'
+    | '/panel/create'
+    | '/panel/media'
+    | '/panel/news'
+    | '/panel/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  MediaRoute: typeof MediaRoute
-  NewsRoute: typeof NewsRoute
-  ContactLazyRoute: typeof ContactLazyRoute
-  LinksLazyRoute: typeof LinksLazyRoute
-  LoginLazyRoute: typeof LoginLazyRoute
+  PanelRoute: typeof PanelRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  MediaRoute: MediaRoute,
-  NewsRoute: NewsRoute,
-  ContactLazyRoute: ContactLazyRoute,
-  LinksLazyRoute: LinksLazyRoute,
-  LoginLazyRoute: LoginLazyRoute,
+  PanelRoute: PanelRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -178,30 +193,36 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/media",
-        "/news",
-        "/contact",
-        "/links",
-        "/login"
+        "/panel"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/media": {
-      "filePath": "media.tsx"
+    "/panel": {
+      "filePath": "panel.tsx",
+      "children": [
+        "/panel/create",
+        "/panel/media",
+        "/panel/news",
+        "/panel/"
+      ]
     },
-    "/news": {
-      "filePath": "news.tsx"
+    "/panel/create": {
+      "filePath": "panel/create.tsx",
+      "parent": "/panel"
     },
-    "/contact": {
-      "filePath": "contact.lazy.tsx"
+    "/panel/media": {
+      "filePath": "panel/media.tsx",
+      "parent": "/panel"
     },
-    "/links": {
-      "filePath": "links.lazy.tsx"
+    "/panel/news": {
+      "filePath": "panel/news.tsx",
+      "parent": "/panel"
     },
-    "/login": {
-      "filePath": "login.lazy.tsx"
+    "/panel/": {
+      "filePath": "panel/index.tsx",
+      "parent": "/panel"
     }
   }
 }

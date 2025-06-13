@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import {
   createFileRoute,
-  redirect,
 } from "@tanstack/react-router";
 
 import {
@@ -114,14 +113,6 @@ const ImagesForm = () => {
   );
 };
 
-export const Route = createFileRoute("/media")({
-  beforeLoad: ({ context, location }) => {
-    if (!context.auth.isAuthenticated) {
-      throw redirect({
-        to: "/login",
-        search: { redirect: location.href },
-      });
-    }
-  },
+export const Route = createFileRoute("/panel/media")({
   component: ImagesForm,
 });

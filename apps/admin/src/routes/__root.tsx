@@ -1,34 +1,45 @@
-import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
+import { createRootRouteWithContext, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { QueryClient } from "@tanstack/react-query";
 
 import { Toaster } from "@packages/ui";
 
-import { Footer, MainContent, Navbar } from "@/layout";
-import { AuthContext } from "@/context/authContext";
+import { AuthContextProps } from "@/context/AuthContext.tsx";
+import { useAuth } from "@/context/useAuth";
+import { useEffect } from "react";
 
 interface MyRouterContext {
-  auth: AuthContext;
-  queryClient: QueryClient;
+    auth: AuthContextProps;
+    queryClient: QueryClient;
 }
+
 export const Route = createRootRouteWithContext<MyRouterContext>()({
-  component: RootComponent,
+    component: RootComponent,
 });
 
 function RootComponent() {
-  return (
-    <>
-      <Navbar />
-      <MainContent>
-        <Outlet />
-      </MainContent>
-      <Footer />
+    const navigate = useNavigate();
+    const { location } = useRouterState()
+    const { isAuthenticated } = useAuth();
 
-      <Toaster />
+    useEffect(() => {
+        if (!isAuthenticated && location.pathname !== "/") {
+            navigate({ to: "/", replace: true });
+        }
 
-      <ReactQueryDevtools buttonPosition="top-right" />
-      <TanStackRouterDevtools position="bottom-right" />
-    </>
-  );
+        if (isAuthenticated && location.pathname === "/") {
+            navigate({ to: "/panel", replace: true });
+        }
+    }, [isAuthenticated]);
+
+    return (
+        <>
+            <Outlet />
+            <Toaster />
+
+            <ReactQueryDevtools buttonPosition="bottom-left" />
+            <TanStackRouterDevtools position="bottom-right" />
+        </>
+    );
 }

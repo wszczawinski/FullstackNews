@@ -1,17 +1,17 @@
 import axios from "axios";
 
-import { Post } from "@packages/types";
+import {CreatePost} from "@packages/types/src/models/post.ts";
+import {AuthResponse} from "@packages/types/src/models/auth.ts";
 
 const apiUrl = import.meta.env.VITE_BE_URL;
 
-export const axiosInstance = axios.create({ baseURL: apiUrl });
-
-const authApi = axios.create({
+export const axiosInstance = axios.create({
   baseURL: apiUrl,
+  headers: {
+    'Content-Type': 'application/json'
+  },
   withCredentials: true,
 });
-
-authApi.defaults.headers.common["Content-Type"] = "application/json";
 
 export enum ENDPOINTS {
   POSTS = "posts",
@@ -25,7 +25,7 @@ export const fetcher = async <T, K>(url: ENDPOINTS, params: K) => {
   return res.data;
 };
 
-export const createPost = async (data: Omit<Post, "id">) => {
+export const createPost = async (data: CreatePost) => {
   return await axiosInstance.post(ENDPOINTS.POSTS, data);
 };
 
@@ -37,21 +37,10 @@ export const postImages = async (images: FormData) => {
   });
 };
 
-type LoginResponse = {
-  status: string;
-  access_token: string;
-  message: string;
-};
-
 export const authLogin = async <T>(data: T) => {
-  return await authApi.post<LoginResponse>(ENDPOINTS.AUTH_LOGIN, data);
-};
-
-type LogoutResponse = {
-  status: string;
-  message: string;
+  return await axiosInstance.post<AuthResponse>(ENDPOINTS.AUTH_LOGIN, data);
 };
 
 export const authLogout = async () => {
-  return await authApi.post<LogoutResponse>(ENDPOINTS.AUTH_LOGOUT);
+  return await axiosInstance.post<AuthResponse>(ENDPOINTS.AUTH_LOGOUT);
 };
