@@ -52,7 +52,8 @@ declare module "@tanstack/react-router" {
   }
 }
 
-function App() {
+// eslint-disable-next-line react-refresh/only-export-components
+const App = () => {
   return <RouterProvider router={router} context={{ queryClient }} />;
 }
 

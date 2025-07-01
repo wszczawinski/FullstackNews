@@ -5,7 +5,7 @@ import { QueryClient } from "@tanstack/react-query";
 
 import { Toaster } from "@packages/ui";
 
-import { AuthContextProps } from "@/context/AuthContext.tsx";
+import { AuthContextProps } from "@/context/AuthContext";
 import { useAuth } from "@/context/useAuth";
 import { useEffect } from "react";
 
@@ -31,6 +31,7 @@ function RootComponent() {
         if (isAuthenticated && location.pathname === "/") {
             navigate({ to: "/panel", replace: true });
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAuthenticated]);
 
     return (

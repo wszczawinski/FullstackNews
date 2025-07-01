@@ -11,7 +11,6 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-    ControllerProps,
 } from "@packages/ui";
 
 import { useAuth } from "@/context/useAuth";
@@ -47,7 +46,7 @@ export const LoginForm = () => {
                 <FormField
                     control={form.control}
                     name="email"
-                    render={({ field }: ControllerProps) => (
+                    render={({ field }) => (
                         <FormItem>
                             <FormLabel>Email</FormLabel>
                             <FormControl>
@@ -60,7 +59,7 @@ export const LoginForm = () => {
                 <FormField
                     control={form.control}
                     name="password"
-                    render={({ field }: ControllerProps) => (
+                    render={({ field }) => (
                         <FormItem>
                             <FormLabel>Password</FormLabel>
                             <FormControl>

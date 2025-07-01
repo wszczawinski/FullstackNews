@@ -8,120 +8,44 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as PanelRouteImport } from './routes/panel'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as PanelIndexRouteImport } from './routes/panel/index'
+import { Route as PanelNewsRouteImport } from './routes/panel/news'
+import { Route as PanelMediaRouteImport } from './routes/panel/media'
+import { Route as PanelCreateRouteImport } from './routes/panel/create'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as PanelImport } from './routes/panel'
-import { Route as IndexImport } from './routes/index'
-import { Route as PanelIndexImport } from './routes/panel/index'
-import { Route as PanelNewsImport } from './routes/panel/news'
-import { Route as PanelMediaImport } from './routes/panel/media'
-import { Route as PanelCreateImport } from './routes/panel/create'
-
-// Create/Update Routes
-
-const PanelRoute = PanelImport.update({
+const PanelRoute = PanelRouteImport.update({
   id: '/panel',
   path: '/panel',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const PanelIndexRoute = PanelIndexImport.update({
+const PanelIndexRoute = PanelIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => PanelRoute,
 } as any)
-
-const PanelNewsRoute = PanelNewsImport.update({
+const PanelNewsRoute = PanelNewsRouteImport.update({
   id: '/news',
   path: '/news',
   getParentRoute: () => PanelRoute,
 } as any)
-
-const PanelMediaRoute = PanelMediaImport.update({
+const PanelMediaRoute = PanelMediaRouteImport.update({
   id: '/media',
   path: '/media',
   getParentRoute: () => PanelRoute,
 } as any)
-
-const PanelCreateRoute = PanelCreateImport.update({
+const PanelCreateRoute = PanelCreateRouteImport.update({
   id: '/create',
   path: '/create',
   getParentRoute: () => PanelRoute,
 } as any)
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/panel': {
-      id: '/panel'
-      path: '/panel'
-      fullPath: '/panel'
-      preLoaderRoute: typeof PanelImport
-      parentRoute: typeof rootRoute
-    }
-    '/panel/create': {
-      id: '/panel/create'
-      path: '/create'
-      fullPath: '/panel/create'
-      preLoaderRoute: typeof PanelCreateImport
-      parentRoute: typeof PanelImport
-    }
-    '/panel/media': {
-      id: '/panel/media'
-      path: '/media'
-      fullPath: '/panel/media'
-      preLoaderRoute: typeof PanelMediaImport
-      parentRoute: typeof PanelImport
-    }
-    '/panel/news': {
-      id: '/panel/news'
-      path: '/news'
-      fullPath: '/panel/news'
-      preLoaderRoute: typeof PanelNewsImport
-      parentRoute: typeof PanelImport
-    }
-    '/panel/': {
-      id: '/panel/'
-      path: '/'
-      fullPath: '/panel/'
-      preLoaderRoute: typeof PanelIndexImport
-      parentRoute: typeof PanelImport
-    }
-  }
-}
-
-// Create and export the route tree
-
-interface PanelRouteChildren {
-  PanelCreateRoute: typeof PanelCreateRoute
-  PanelMediaRoute: typeof PanelMediaRoute
-  PanelNewsRoute: typeof PanelNewsRoute
-  PanelIndexRoute: typeof PanelIndexRoute
-}
-
-const PanelRouteChildren: PanelRouteChildren = {
-  PanelCreateRoute: PanelCreateRoute,
-  PanelMediaRoute: PanelMediaRoute,
-  PanelNewsRoute: PanelNewsRoute,
-  PanelIndexRoute: PanelIndexRoute,
-}
-
-const PanelRouteWithChildren = PanelRoute._addFileChildren(PanelRouteChildren)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -131,7 +55,6 @@ export interface FileRoutesByFullPath {
   '/panel/news': typeof PanelNewsRoute
   '/panel/': typeof PanelIndexRoute
 }
-
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/panel/create': typeof PanelCreateRoute
@@ -139,9 +62,8 @@ export interface FileRoutesByTo {
   '/panel/news': typeof PanelNewsRoute
   '/panel': typeof PanelIndexRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/panel': typeof PanelRouteWithChildren
   '/panel/create': typeof PanelCreateRoute
@@ -149,7 +71,6 @@ export interface FileRoutesById {
   '/panel/news': typeof PanelNewsRoute
   '/panel/': typeof PanelIndexRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
@@ -171,59 +92,78 @@ export interface FileRouteTypes {
     | '/panel/'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PanelRoute: typeof PanelRouteWithChildren
 }
 
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/panel': {
+      id: '/panel'
+      path: '/panel'
+      fullPath: '/panel'
+      preLoaderRoute: typeof PanelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/panel/': {
+      id: '/panel/'
+      path: '/'
+      fullPath: '/panel/'
+      preLoaderRoute: typeof PanelIndexRouteImport
+      parentRoute: typeof PanelRoute
+    }
+    '/panel/news': {
+      id: '/panel/news'
+      path: '/news'
+      fullPath: '/panel/news'
+      preLoaderRoute: typeof PanelNewsRouteImport
+      parentRoute: typeof PanelRoute
+    }
+    '/panel/media': {
+      id: '/panel/media'
+      path: '/media'
+      fullPath: '/panel/media'
+      preLoaderRoute: typeof PanelMediaRouteImport
+      parentRoute: typeof PanelRoute
+    }
+    '/panel/create': {
+      id: '/panel/create'
+      path: '/create'
+      fullPath: '/panel/create'
+      preLoaderRoute: typeof PanelCreateRouteImport
+      parentRoute: typeof PanelRoute
+    }
+  }
+}
+
+interface PanelRouteChildren {
+  PanelCreateRoute: typeof PanelCreateRoute
+  PanelMediaRoute: typeof PanelMediaRoute
+  PanelNewsRoute: typeof PanelNewsRoute
+  PanelIndexRoute: typeof PanelIndexRoute
+}
+
+const PanelRouteChildren: PanelRouteChildren = {
+  PanelCreateRoute: PanelCreateRoute,
+  PanelMediaRoute: PanelMediaRoute,
+  PanelNewsRoute: PanelNewsRoute,
+  PanelIndexRoute: PanelIndexRoute,
+}
+
+const PanelRouteWithChildren = PanelRoute._addFileChildren(PanelRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PanelRoute: PanelRouteWithChildren,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/panel"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/panel": {
-      "filePath": "panel.tsx",
-      "children": [
-        "/panel/create",
-        "/panel/media",
-        "/panel/news",
-        "/panel/"
-      ]
-    },
-    "/panel/create": {
-      "filePath": "panel/create.tsx",
-      "parent": "/panel"
-    },
-    "/panel/media": {
-      "filePath": "panel/media.tsx",
-      "parent": "/panel"
-    },
-    "/panel/news": {
-      "filePath": "panel/news.tsx",
-      "parent": "/panel"
-    },
-    "/panel/": {
-      "filePath": "panel/index.tsx",
-      "parent": "/panel"
-    }
-  }
-}
-ROUTE_MANIFEST_END */

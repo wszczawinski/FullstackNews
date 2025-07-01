@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { AuthResponse } from "@packages/types/src/models/auth.ts";
+import { AuthResponse } from "@packages/types";
 import { useAuthLogin, useAuthLogout } from "@/services/mutations.ts";
 
-import { AuthContext } from "./AuthContext.tsx";
+import { AuthContext } from "@/context/AuthContext";
 
 export const AuthContextProvider = ({ children }: { children: React.ReactNode; }) => {
     const [expiresAt, setExpiresAt] = useState<Date | null>(null);

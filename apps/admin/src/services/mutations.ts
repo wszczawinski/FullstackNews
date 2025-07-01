@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useToast } from "@packages/ui";
-import { CreatePost } from "@packages/types/src/models/post.ts";
-import { AuthResponse, LoginRequest } from "@packages/types/src/models/auth.ts";
+import { CreatePost } from "@packages/types";
+import { AuthResponse, LoginRequest } from "@packages/types";
 
 import { ENDPOINTS, authLogin, authLogout, createPost } from "./api";
 

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-import {CreatePost} from "@packages/types/src/models/post.ts";
-import {AuthResponse} from "@packages/types/src/models/auth.ts";
+import {CreatePost} from "@packages/types";
+import {AuthResponse} from "@packages/types";
 
 const apiUrl = import.meta.env.VITE_BE_URL;
 

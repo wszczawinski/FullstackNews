@@ -13,8 +13,8 @@ import {
 // 💡 route tree - run project to auto-generate
 import { routeTree } from "./routeTree.gen";
 
-import { useAuth } from "./context/useAuth";
-import { AuthContextProvider } from "./context/AuthContextProvider.tsx";
+import { useAuth } from "@/context/useAuth";
+import { AuthContextProvider } from "@/context/AuthContextProvider";
 
 import "./index.css";
 
@@ -56,6 +56,7 @@ declare module "@tanstack/react-router" {
   }
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 function App() {
   const auth = useAuth();
   return <RouterProvider router={router} context={{ queryClient, auth }} />;

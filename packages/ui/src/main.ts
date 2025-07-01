@@ -11,7 +11,6 @@ export {
     FormLabel,
     FormMessage,
     useFormField,
-    type ControllerProps
 } from "./components/form";
 export * from "./components/input";
 export * from "./components/label";

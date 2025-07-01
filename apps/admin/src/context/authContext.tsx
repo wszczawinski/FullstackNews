@@ -1,6 +1,6 @@
 import {createContext} from "react";
 
-import {LoginRequest} from "@packages/types/src/models/auth.ts";
+import {LoginRequest} from "@packages/types";
 
 export interface AuthContextProps {
     isAuthenticated: boolean;

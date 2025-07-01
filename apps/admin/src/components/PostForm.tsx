@@ -16,8 +16,7 @@ import {
     SelectTrigger,
     SelectContent,
     SelectValue,
-    SelectItem,
-    ControllerProps
+    SelectItem
 } from "@packages/ui";
 
 import {RichTextArea} from "@/components/RichTextArea.tsx";
@@ -64,7 +63,7 @@ export const PostForm = () => {
                 <FormField
                     control={form.control}
                     name="title"
-                    render={({field}: ControllerProps) => (
+                    render={({field}) => (
                         <FormItem>
                             <FormLabel>Title</FormLabel>
                             <FormControl>
@@ -77,7 +76,7 @@ export const PostForm = () => {
                 <FormField
                     control={form.control}
                     name="category"
-                    render={({field}: ControllerProps) => (
+                    render={({field}) => (
                         <FormItem>
                             <FormLabel>Category</FormLabel>
                             <FormControl>
@@ -90,7 +89,7 @@ export const PostForm = () => {
                 <FormField
                     control={form.control}
                     name="status"
-                    render={({field}: ControllerProps) => (
+                    render={({field}) => (
                         <FormItem>
                             <FormLabel>Status</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
